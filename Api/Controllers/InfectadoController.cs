@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Api.Data.Collections;
 using Api.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -30,10 +30,9 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult ObterInfectados()
+        public async Task<ActionResult> ObterInfectados()
         {
-            var infectados = _infectadosCollection.Find(Builders<Infectado>.Filter.Empty)
-                .ToList();
+            var infectados = await _infectadosCollection.FindSync(Builders<Infectado>.Filter.Empty).ToListAsync();
             
             return Ok(infectados);
         }
